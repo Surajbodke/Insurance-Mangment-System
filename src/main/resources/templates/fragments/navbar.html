@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Insurance Management System</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="navbar-brand">Insurance Management System</a>
+            
+            <ul class="nav-links">
+                <li sec:authorize="isAuthenticated()">
+                    <a href="/dashboard">Dashboard</a>
+                </li>
+                
+                <!-- Admin Links -->
+                <li sec:authorize="hasRole('ADMIN')">
+                    <a href="/admin/dashboard">Admin Dashboard</a>
+                </li>
+                <li sec:authorize="hasRole('ADMIN')">
+                    <a href="/users">Users</a>
+                </li>
+                <li sec:authorize="hasRole('ADMIN')">
+                    <a href="/agents">Agents</a>
+                </li>
+                
+                <!-- Agent Links -->
+                <li sec:authorize="hasRole('AGENT')">
+                    <a href="/agent/dashboard">Agent Dashboard</a>
+                </li>
+                <li sec:authorize="hasRole('AGENT')">
+                    <a href="/policies">Policies</a>
+                </li>
+                <li sec:authorize="hasRole('AGENT')">
+                    <a href="/claims">Claims</a>
+                </li>
+                
+                <!-- Customer Links -->
+                <li sec:authorize="hasRole('CUSTOMER')">
+                    <a href="/customer/dashboard">Customer Dashboard</a>
+                </li>
+                <li sec:authorize="hasRole('CUSTOMER')">
+                    <a href="/policies/customer/[[${#authentication.name}]]">My Policies</a>
+                </li>
+                <li sec:authorize="hasRole('CUSTOMER')">
+                    <a href="/claims/customer/[[${#authentication.name}]]">My Claims</a>
+                </li>
+                
+                <!-- Authentication Links -->
+                <li sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="logout-btn">Logout</button>
+                    </form>
+                </li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a href="/login">Login</a>
+                </li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a href="/register">Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</body>
+</html> 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard - Insurance Management System</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        
+        <div class="dashboard">
+            <div class="card">
+                <h3>Users</h3>
+                <p>Total Users: <span th:text="${totalUsers}">0</span></p>
+                <a href="/users">Manage Users</a>
+            </div>
+            
+            <div class="card">
+                <h3>Agents</h3>
+                <p>Total Agents: <span th:text="${totalAgents}">0</span></p>
+                <a href="/agents">Manage Agents</a>
+            </div>
+            
+            <div class="card">
+                <h3>Policies</h3>
+                <p>Total Policies: <span th:text="${totalPolicies}">0</span></p>
+                <a href="/policies">Manage Policies</a>
+            </div>
+            
+            <div class="card">
+                <h3>Claims</h3>
+                <p>Total Claims: <span th:text="${totalClaims}">0</span></p>
+                <a href="/claims">Manage Claims</a>
+            </div>
+        </div>
+        
+        <div class="recent-activity">
+            <h2>Recent Activity</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="activity : ${recentActivities}">
+                        <td th:text="${activity.type}">Type</td>
+                        <td th:text="${activity.description}">Description</td>
+                        <td th:text="${activity.date}">Date</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html> 

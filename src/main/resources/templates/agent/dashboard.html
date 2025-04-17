@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Agent Dashboard - Insurance Management System</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    
+    <div class="container">
+        <h1>Agent Dashboard</h1>
+        
+        <div class="dashboard">
+            <div class="card">
+                <h3>My Policies</h3>
+                <p>Total Policies: <span th:text="${totalPolicies}">0</span></p>
+                <a href="/policies/agent/[[${#authentication.name}]]">View Policies</a>
+            </div>
+            
+            <div class="card">
+                <h3>Pending Claims</h3>
+                <p>Claims to Process: <span th:text="${pendingClaims}">0</span></p>
+                <a href="/claims">Process Claims</a>
+            </div>
+            
+            <div class="card">
+                <h3>Customers</h3>
+                <p>Total Customers: <span th:text="${totalCustomers}">0</span></p>
+                <a href="/customers">View Customers</a>
+            </div>
+            
+            <div class="card">
+                <h3>Commission</h3>
+                <p>Total Commission: $<span th:text="${totalCommission}">0.00</span></p>
+                <a href="/commission">View Details</a>
+            </div>
+        </div>
+        
+        <div class="recent-activity">
+            <h2>Recent Activity</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="activity : ${recentActivities}">
+                        <td th:text="${activity.type}">Type</td>
+                        <td th:text="${activity.description}">Description</td>
+                        <td th:text="${activity.date}">Date</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html> 
